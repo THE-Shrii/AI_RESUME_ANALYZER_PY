@@ -63,7 +63,7 @@ flowchart TD
 ## Installation
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/THE-Shrii/AI_RESUME_ANALYZER_PY.git
 cd AI-RESUME-ANALYZER
 python -m venv venv
 venv\Scripts\activate
@@ -160,8 +160,8 @@ Tech stack: Python, Streamlit, Pandas, Plotly, PyPDF2, Gemini API, ReportLab.
 
 This project helped me practice GenAI architecture, resume intelligence, prompt engineering, dashboard design, and production-style Python modularization.
 
-GitHub: <your-link>
-Demo: <your-link>
+GitHub: https://github.com/THE-Shrii/AI_RESUME_ANALYZER_PY
+Demo: https://the-shrii-ai-resume-analyzer-py-app-y9ghn4.streamlit.app/
 
 ## Portfolio Description
 
