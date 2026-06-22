@@ -25,19 +25,17 @@ This project upgrades a basic resume analyzer into a portfolio-ready AI/ML and G
 
 ## Screenshots
 
-Place screenshots in:
+### Dashboard
+![Dashboard](assets/screenshots/dashboard.png)
 
-- `assets/screenshots/dashboard.png`
-- `assets/screenshots/ats-score.png`
-- `assets/screenshots/interview-generator.png`
-- `assets/screenshots/ai-analysis.png`
+### ATS Score
+![ATS Score](assets/screenshots/ats-score.png)
 
-Suggested capture flow:
+### Interview Generator
+![Interview Generator](assets/screenshots/interview-generator.png)
 
-1. Run the app locally.
-2. Upload a resume PDF and add a job description.
-3. Capture the dashboard, ATS score cards, interview generator, and AI analysis sections.
-4. Save the images with the exact filenames above.
+### AI Analysis
+![AI Analysis](assets/screenshots/ai-analysis.png)
 
 ## Architecture Diagram
 
