@@ -168,6 +168,5 @@ def main() -> None:
     else:
         render_recruiter_summary(st.session_state.analysis_result, analyzer)
 
-
 if __name__ == "__main__":
     main()
