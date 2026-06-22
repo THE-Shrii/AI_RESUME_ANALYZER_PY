@@ -212,4 +212,4 @@ MIT License. You can use, modify, and distribute this project with attribution.
 
 ## Author
 
-Built by **Your Name** as a portfolio-ready GenAI engineering project.
+Built by **Shristi Kumari** as a portfolio-ready GenAI engineering project.
