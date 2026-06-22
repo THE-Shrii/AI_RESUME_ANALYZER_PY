@@ -1,0 +1,540 @@
+# AI Resume Analyzer - Complete Project Roadmap
+
+## Project Goal
+
+Build an AI-powered web application where users can
+
+1. Upload their Resume (PDF)
+2. Paste a Job Description
+3. Analyze Resume vs Job Description
+4. Get Match Score
+5. Identify Missing Skills
+6. Receive Improvement Suggestions
+7. Download Analysis Report
+
+---
+
+# Final Output
+
+User Uploads Resume.pdf
+
+↓
+
+Extract Resume Text
+
+↓
+
+Compare with Job Description
+
+↓
+
+Generate Match Percentage
+
+↓
+
+Identify Missing Skills
+
+↓
+
+AI Suggestions
+
+↓
+
+Display Results Dashboard
+
+---
+
+# Tech Stack
+
+Frontend
+
+ Streamlit
+
+Backend
+
+ Python
+
+Libraries
+
+ Pandas
+ PyPDF2
+ pdfplumber
+ re
+ nltk
+ scikit-learn
+
+AI
+
+ Gemini API
+
+Deployment
+
+ Streamlit Cloud
+  or
+ Render
+
+Version Control
+
+ Git
+ GitHub
+
+---
+
+# Project Folder Structure
+
+resume-analyzer
+│
+├── app.py
+│
+├── requirements.txt
+│
+├── README.md
+│
+├── data
+│
+│   ├── sample_resume.pdf
+│   └── sample_jd.txt
+│
+├── utils
+│
+│   ├── pdf_reader.py
+│   ├── text_cleaner.py
+│   ├── skill_extractor.py
+│   ├── score_calculator.py
+│   └── gemini_analyzer.py
+│
+├── reports
+│
+│   └── generated_report.pdf
+│
+├── assets
+│
+│   └── logo.png
+│
+└── screenshots
+
+---
+
+# Phase 1
+
+PDF Upload System
+
+Goal
+Allow user to upload resume.
+
+Learn
+
+ Streamlit file uploader
+ PDF handling
+
+Task
+
+Create Upload Section
+
+resume = st.file_uploader(
+Upload Resume,
+type=[pdf]
+)
+
+Output
+PDF uploaded successfully
+
+---
+
+# Phase 2
+
+Resume Text Extraction
+
+Goal
+Extract all text from PDF.
+
+File
+
+utilspdf_reader.py
+
+Function
+
+extract_resume_text()
+
+Input
+Resume PDF
+
+Output
+Plain Text
+
+Example
+
+Skills
+Python
+React
+SQL
+
+Experience
+Frontend Developer
+
+---
+
+# Phase 3
+
+Text Cleaning
+
+Goal
+Clean extracted text.
+
+Remove
+
+ Extra spaces
+ Symbols
+ Line breaks
+
+File
+
+utilstext_cleaner.py
+
+Tasks
+
+Convert to lowercase
+
+Remove
+
+@
+
+#
+
+$
+%
+!
+
+Output
+
+cleaned_text
+
+---
+
+# Phase 4
+
+Skill Extraction
+
+Goal
+Find skills from resume.
+
+File
+
+utilsskill_extractor.py
+
+Create Skill Database
+
+skills = [
+python,
+sql,
+pandas,
+numpy,
+react,
+javascript,
+docker,
+aws,
+machine learning,
+tensorflow,
+langchain,
+gen ai
+]
+
+Logic
+
+if skill in resume_text
+add skill
+
+Output
+
+Found Skills
+
+Python
+Pandas
+SQL
+
+---
+
+# Phase 5
+
+Job Description Processing
+
+User Pastes
+
+Job Description
+
+Example
+
+Looking for Python Developer with
+Pandas
+SQL
+AWS
+Docker
+
+Extract Skills
+
+Output
+
+Required Skills
+Python
+Pandas
+SQL
+AWS
+Docker
+
+---
+
+# Phase 6
+
+Match Score Engine
+
+Goal
+Calculate similarity.
+
+Formula
+
+Matched Skills 
+Total Required Skills
+
+×100
+
+Example
+
+Required
+Python
+SQL
+Docker
+AWS
+
+Resume
+Python
+SQL
+
+Score
+
+24 ×100
+
+=50%
+
+Output
+
+Match Score
+50%
+
+---
+
+# Phase 7
+
+Missing Skills Detection
+
+Logic
+
+## Required Skills
+
+Resume Skills
+
+Output
+
+Missing Skills
+
+Docker
+AWS
+
+This is very useful for recruiters.
+
+---
+
+# Phase 8
+
+Gemini Integration
+
+Goal
+Generate intelligent analysis.
+
+Prompt
+
+Analyze this resume against
+the job description.
+
+Provide
+
+1. Strengths
+2. Weaknesses
+3. Missing Skills
+4. Suggestions
+5. Interview Readiness Score
+
+Resume
+{resume_text}
+
+Job Description
+{jd_text}
+
+Output
+
+Strengths
+Good Python Knowledge
+
+Weaknesses
+No Cloud Experience
+
+Suggestions
+Learn AWS
+Learn Docker
+
+---
+
+# Phase 9
+
+Dashboard UI
+
+Sections
+
+1. Resume Uploaded
+
+2. Match Score
+
+3. Found Skills
+
+4. Missing Skills
+
+5. Gemini Feedback
+
+6. Improvement Suggestions
+
+UI Components
+
+ Progress Bar
+ Cards
+ Metrics
+ Expanders
+
+---
+
+# Phase 10
+
+PDF Report Generator
+
+Generate Downloadable Report
+
+Contents
+
+Candidate Name
+
+Match Score
+
+Found Skills
+
+Missing Skills
+
+AI Suggestions
+
+Output
+
+resume_report.pdf
+
+---
+
+# Phase 11
+
+Deployment
+
+Deploy On
+
+1. Streamlit Cloud
+2. Render
+
+Add Environment Variables
+
+GEMINI_API_KEY
+
+Never hardcode API keys.
+
+---
+
+# Bonus Features
+
+Feature 1
+
+ATS Compatibility Checker
+
+Check
+
+ Keywords
+ Formatting
+ Length
+
+---
+
+Feature 2
+
+Resume Improvement Generator
+
+AI rewrites weak sections.
+
+---
+
+Feature 3
+
+Interview Question Generator
+
+Generate questions based on
+
+Resume
++
+Job Description
+
+---
+
+Feature 4
+
+Multiple Resume Comparison
+
+Upload
+
+Resume A
+Resume B
+Resume C
+
+Find Best Match
+
+---
+
+# Resume Points
+
+Built an AI-powered Resume Analyzer using Python, Streamlit, Pandas, and Gemini API.
+
+Implemented PDF parsing, skill extraction, ATS scoring, and job-description matching.
+
+Developed AI-driven recommendations for skill-gap analysis and resume optimization.
+
+Deployed the application on Streamlit Cloud with secure API key management.
+
+---
+
+# Learning Outcome
+
+After completing this project you will understand
+
+✓ Python Project Structure
+
+✓ Streamlit
+
+✓ PDF Processing
+
+✓ NLP Basics
+
+✓ Pandas
+
+✓ Gemini API
+
+✓ Prompt Engineering
+
+✓ ATS Matching Logic
+
+✓ Deployment
+
+✓ GitHub Portfolio Development
+
+Estimated Time
+7-10 Days
+(2-3 hours daily)

@@ -1,0 +1,645 @@
+AI RESUME ANALYZER - INTERVIEW QUESTIONS WITH ANSWERS
+=====================================================
+
+Project Name: ResumeIQ - AI Resume Analyzer
+Tech Stack: Python, Streamlit, Pandas, Plotly, PyPDF2, Gemini API, ReportLab, python-dotenv
+
+
+1. What is the main objective of this project?
+Answer:
+The main objective of this project is to analyze a candidate's resume against a target job description and generate useful career insights. The application calculates ATS score, resume match score, skill gaps, matched skills, missing skills, AI resume feedback, interview questions, learning roadmap, recruiter summary, and a downloadable report.
+
+
+2. Why did you build this project?
+Answer:
+I built this project to solve a real job-search problem. Many candidates do not know whether their resume matches a job description or how an ATS system may evaluate it. This project helps candidates improve their resume by identifying missing keywords, weak sections, and skill gaps. It also demonstrates my skills in GenAI, Python, Streamlit, data processing, prompt engineering, and product-style UI design.
+
+
+3. What problem does this project solve?
+Answer:
+The project solves the problem of resume-job mismatch. Candidates often apply without knowing whether their resume contains the right skills, keywords, structure, or impact statements. ResumeIQ gives them an ATS score, match score, missing skills, improvement suggestions, and AI-generated preparation material so they can improve before applying.
+
+
+4. What are the key features of this project?
+Answer:
+The key features are:
+- Resume PDF upload
+- Job description PDF upload or pasted JD input
+- Resume text extraction
+- Text cleaning and normalization
+- Skill extraction
+- ATS score calculation
+- Resume match score calculation
+- Matched and missing skill detection
+- Recommended and emerging skill suggestions
+- AI resume analysis using Gemini
+- Interview question generator
+- Four-week learning roadmap generator
+- Recruiter summary generator
+- Interactive charts using Plotly
+- Downloadable professional report
+- Modern dark SaaS-style Streamlit UI
+
+
+5. Explain the architecture of your project.
+Answer:
+The project follows a modular architecture. The main `app.py` file controls the Streamlit layout, session state, sidebar uploads, and page navigation. The `pages/` folder contains separate UI modules for dashboard, interview questions, learning roadmap, and recruiter summary. The `utils/` folder contains reusable logic for PDF reading, text cleaning, skill extraction, ATS scoring, match scoring, Gemini analysis, and report generation. This keeps the application scalable and easier to maintain.
+
+
+6. Why did you use Streamlit?
+Answer:
+I used Streamlit because it allows fast development of interactive data and AI applications using Python. It is suitable for dashboards, file upload workflows, charts, and AI demos. For this project, Streamlit helped me build a recruiter-friendly and portfolio-ready interface without needing a separate frontend framework.
+
+
+7. How does resume text extraction work?
+Answer:
+The resume is uploaded as a PDF. The project uses PyPDF2 to read the PDF file page by page. For each page, it extracts available text and combines it into a single resume text string. This text is then passed to the cleaning, skill extraction, scoring, and AI analysis modules.
+
+
+8. What happens if the PDF is scanned or image-based?
+Answer:
+PyPDF2 works best with text-based PDFs. If the PDF is scanned or image-based, text extraction may fail or return empty text. In the current version, the app shows a clear error message. A future improvement would be adding OCR support using tools like Tesseract, EasyOCR, or a cloud vision API.
+
+
+9. How does text cleaning work?
+Answer:
+Text cleaning converts the text to lowercase, removes unnecessary special characters, normalizes whitespace, and prepares the text for keyword matching. This improves the accuracy of skill extraction because skills can be compared in a consistent format.
+
+
+10. How does skill extraction work?
+Answer:
+The app loads a skill catalog from `data/skills.csv`. It scans the cleaned resume and job description text for known skills. If a skill from the catalog appears in the text, it is added to the detected skills list. The app then compares resume skills with job description skills to find matched and missing skills.
+
+
+11. Why did you use a CSV file for skills?
+Answer:
+I used a CSV file because it is simple, editable, and scalable for a portfolio project. New skills can be added without changing the code. It also separates data from logic, which makes the project easier to maintain.
+
+
+12. How is the resume match score calculated?
+Answer:
+The resume match score is calculated by comparing detected resume skills with detected job description skills. The formula is:
+
+Match Score = (Number of Matched JD Skills / Total JD Skills) * 100
+
+For example, if the job description has 10 detected skills and the resume contains 7 of them, the match score is 70%.
+
+
+13. How is the ATS score calculated?
+Answer:
+The ATS score is calculated using multiple factors:
+- Skill match
+- Contact information
+- Resume structure
+- Impact signals
+- Readability
+
+The score is not based only on keywords. It also checks whether the resume has important sections like education, experience, projects, and skills, whether contact details are present, and whether the resume uses action-oriented impact words and measurable results.
+
+
+14. What is the difference between ATS score and match score?
+Answer:
+The match score measures how well the resume skills match the job description skills. The ATS score is broader. It considers skill match, resume structure, contact information, readability, and impact signals. So match score is keyword-focused, while ATS score is resume-quality focused.
+
+
+15. What are matched skills?
+Answer:
+Matched skills are skills that appear in both the resume and the job description. These indicate that the candidate already has some skills required for the role.
+
+
+16. What are missing skills?
+Answer:
+Missing skills are skills found in the job description but not detected in the resume. These are important because they show what the candidate should learn or add to the resume if they already know them.
+
+
+17. What are recommended skills?
+Answer:
+Recommended skills are generated from missing skills and important industry skills. They help the candidate understand which skills can improve their profile for the target role.
+
+
+18. What are emerging industry skills?
+Answer:
+Emerging industry skills are modern, high-demand skills such as generative AI, LLM, RAG, vector databases, LangChain, prompt engineering, MLOps, and cloud deployment. These skills help make the candidate more competitive in current AI and software roles.
+
+
+19. How did you integrate Gemini AI?
+Answer:
+I created a `GeminiAnalyzer` class inside `utils/gemini_analyzer.py`. It loads the API key from the `.env` file using `python-dotenv`, configures the Gemini model, and sends prompt templates for different tasks such as resume analysis, interview question generation, learning roadmap generation, and recruiter summary generation.
+
+
+20. Why did you use environment variables?
+Answer:
+Environment variables keep sensitive information like API keys outside the source code. This is important for security and deployment. The Gemini API key is stored in `.env`, and `.env` is ignored by Git using `.gitignore`.
+
+
+21. What happens if the Gemini API key is missing?
+Answer:
+The project has fallback responses. If the Gemini API key is missing or the API is unavailable, the app still generates useful deterministic content based on the analysis result. This makes the app demo-friendly and prevents the user experience from breaking.
+
+
+22. What is prompt engineering in this project?
+Answer:
+Prompt engineering is used to instruct Gemini to generate structured outputs. For example, the resume analysis prompt asks for strengths, weaknesses, resume summary, improvement suggestions, and interview readiness score. Separate prompts are used for interview questions, learning roadmap, and recruiter summary.
+
+
+23. Why did you create separate page files?
+Answer:
+Separate page files improve modularity. Instead of keeping all UI logic in one large file, the dashboard, interview questions, learning roadmap, and recruiter summary are separated into individual modules. This makes the app easier to understand, test, extend, and debug.
+
+
+24. What is the role of `app.py`?
+Answer:
+`app.py` is the main entry point of the application. It configures the Streamlit page, loads CSS, initializes session state, renders the sidebar, handles file upload, builds the analysis result, and routes the user to different pages.
+
+
+25. What is the role of session state?
+Answer:
+Session state stores analysis data and generated AI outputs across Streamlit reruns. Without session state, generated content like AI analysis or interview questions could disappear whenever the page refreshes or a user interacts with another widget.
+
+
+26. Why did you use caching?
+Answer:
+Caching improves performance by avoiding repeated work. For example, extracted PDF text and the skill catalog can be reused instead of recalculated on every Streamlit rerun.
+
+
+27. What charts did you use in this project?
+Answer:
+I used Plotly charts including:
+- Pie chart for matched vs missing skills
+- Radar chart for ATS breakdown
+- Bar chart or heatmap-style chart for skill coverage
+
+These charts make the analysis visually clear and interactive.
+
+
+28. Why did you use Plotly?
+Answer:
+Plotly provides interactive and professional-looking charts. It works well with Streamlit and helps create a modern dashboard experience similar to SaaS platforms.
+
+
+29. How does the report download feature work?
+Answer:
+The `ReportGenerator` class creates a professional report containing ATS score, match score, skills, AI analysis, interview questions, learning roadmap, and recruiter summary. It tries to generate a PDF using ReportLab. If PDF generation fails, it falls back to a text/markdown report.
+
+
+30. Why did you use ReportLab?
+Answer:
+ReportLab is a Python library for generating PDF documents. It allows the app to create downloadable professional reports directly from the analysis results.
+
+
+31. What UI improvements did you make?
+Answer:
+I redesigned the UI with:
+- Professional dark theme
+- Glassmorphism cards
+- Modern sidebar
+- Responsive layout
+- Animated progress bars
+- Interactive charts
+- Skill tags
+- Hover effects
+- SaaS-style metric cards
+- Cleaner dashboard hierarchy
+
+
+32. How is your app similar to SaaS products like Jobscan or Resume Worded?
+Answer:
+It has a dashboard-driven workflow, resume scoring, skill gap detection, ATS insights, AI suggestions, and report generation. The UI also uses a premium dark theme, cards, charts, and structured recommendations, making it feel closer to a professional SaaS product than a basic script.
+
+
+33. What are before and after improvement suggestions?
+Answer:
+The app shows weak resume statements as "Before" and stronger improved versions as "After". This helps candidates understand how to rewrite resume bullets with better keywords, measurable impact, and stronger action verbs.
+
+
+34. What is interview readiness score?
+Answer:
+Interview readiness score estimates how prepared a candidate may be based on match score, matched skills, ATS strength, and impact signals. It is useful for giving candidates a quick preparation indicator.
+
+
+35. What type of interview questions does the app generate?
+Answer:
+The app generates:
+- Technical questions
+- Behavioral questions
+- Project-based questions
+- HR questions
+
+These questions are generated based on the resume, job description, matched skills, and missing skills.
+
+
+36. How does the learning roadmap work?
+Answer:
+The learning roadmap focuses on missing and recommended skills. It generates a four-week plan with learning goals, practical project work, portfolio improvement, and interview preparation.
+
+
+37. What does the recruiter summary include?
+Answer:
+The recruiter summary includes candidate overview, strength areas, concerns, and hiring recommendation. It is designed to summarize the candidate from a recruiter or hiring manager perspective.
+
+
+38. What are the main classes used in the project?
+Answer:
+The main classes are:
+- `PDFReader`
+- `TextCleaner`
+- `SkillExtractor`
+- `ATSCalculator`
+- `ResumeAnalysisEngine`
+- `GeminiAnalyzer`
+- `ReportGenerator`
+
+
+39. How does OOP help in this project?
+Answer:
+OOP helps separate responsibilities. Each class handles one major part of the system. For example, `PDFReader` handles PDF extraction, `SkillExtractor` handles skill detection, `ATSCalculator` handles ATS scoring, and `GeminiAnalyzer` handles AI generation. This improves readability, reusability, and maintainability.
+
+
+40. How did you handle errors?
+Answer:
+The project handles errors in PDF parsing, Gemini API calls, and report generation. For example, if PDF extraction fails, the user gets a readable error. If Gemini fails, the app returns fallback content. If PDF report generation fails, it falls back to a text-based report.
+
+
+41. What are the limitations of this project?
+Answer:
+Some limitations are:
+- Skill extraction is based on a predefined CSV catalog.
+- PyPDF2 may not work well with scanned PDFs.
+- ATS scoring is a custom approximation, not an actual company ATS algorithm.
+- AI output quality depends on prompt quality and Gemini API availability.
+- It does not currently store user history or support authentication.
+
+
+42. How can this project be improved in the future?
+Answer:
+Future improvements include:
+- OCR support for scanned resumes
+- User login and saved analysis history
+- Resume version comparison
+- More advanced NLP-based skill extraction
+- Role-specific scoring models
+- Multi-model support for Gemini, OpenAI, and local LLMs
+- Stripe billing for SaaS monetization
+- Admin dashboard for recruiters
+
+
+43. How would you make skill extraction more advanced?
+Answer:
+I would improve skill extraction by using NLP techniques such as named entity recognition, semantic similarity, embeddings, and synonym mapping. For example, if the JD says "LLM orchestration" and the resume says "LangChain agents", embeddings can detect that they are related even if exact keywords do not match.
+
+
+44. How would you add OCR support?
+Answer:
+I would add OCR by checking if extracted text is empty or too short. If that happens, the app can convert PDF pages to images and use Tesseract, EasyOCR, or a cloud OCR API to extract text from images.
+
+
+45. How would you deploy this project?
+Answer:
+I can deploy it on Streamlit Cloud, Render, or Railway. For Streamlit Cloud, I would push the project to GitHub, create a Streamlit app, select `app.py`, and add the Gemini API key in secrets. For Render or Railway, I would use the start command:
+
+streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+
+
+46. What is the use of `.gitignore` in this project?
+Answer:
+`.gitignore` prevents unnecessary or sensitive files from being committed to GitHub. For example, it ignores the virtual environment, `.env` file, Python cache files, Streamlit secrets, and generated reports.
+
+
+47. Why is `.env` not pushed to GitHub?
+Answer:
+The `.env` file contains sensitive data like API keys. Pushing it to GitHub can expose credentials publicly. Instead, the README explains how users can create their own `.env` file.
+
+
+48. What makes this project production-ready compared to a beginner Streamlit app?
+Answer:
+This project is more production-ready because it has modular architecture, separate utility classes, error handling, environment variables, session state, caching, report generation, responsive UI, professional styling, and a complete README with deployment instructions.
+
+
+49. What is glassmorphism in your UI?
+Answer:
+Glassmorphism is a visual design style that uses semi-transparent cards, borders, blur effects, and layered backgrounds. In this project, it gives the dashboard a modern SaaS look.
+
+
+50. How did you make the app responsive?
+Answer:
+The app uses Streamlit's wide layout, columns, flexible cards, and CSS media queries. On smaller screens, sections such as the hero and before/after cards stack vertically to avoid layout issues.
+
+
+51. Why did you include a README?
+Answer:
+The README explains the project clearly for recruiters, GitHub visitors, and developers. It includes project overview, features, architecture diagram, installation, environment setup, usage guide, tech stack, folder structure, future improvements, deployment guide, and portfolio description.
+
+
+52. How does this project help your AI/ML engineer resume?
+Answer:
+It demonstrates practical AI application development, GenAI integration, data processing, scoring logic, dashboard design, and deployment readiness. It also shows that I can convert an idea into a usable product.
+
+
+53. How does this project help your GenAI engineer resume?
+Answer:
+It shows experience with prompt engineering, LLM integration, structured AI outputs, fallback handling, AI-powered analysis, and real-world GenAI workflow design.
+
+
+54. How would you explain this project in 30 seconds?
+Answer:
+ResumeIQ is a GenAI-powered resume analyzer that compares a resume with a job description. It extracts resume text, detects skills, calculates ATS and match scores, finds missing skills, generates AI feedback, creates interview questions and a learning roadmap, writes recruiter summaries, and exports a professional report. I built it using Python, Streamlit, Plotly, PyPDF2, Gemini API, and modular OOP design.
+
+
+55. How would you explain this project to a non-technical recruiter?
+Answer:
+This app helps job seekers improve their resume before applying. They upload their resume and job description, and the app tells them how well they match, what skills are missing, how to improve their resume, what questions they may face in an interview, and what to learn next.
+
+
+56. What was the most challenging part of this project?
+Answer:
+The most challenging part was designing the app as a complete product instead of just a simple script. I had to think about UI/UX, modular architecture, AI prompt quality, scoring logic, fallback handling, and report generation together.
+
+
+57. What did you learn from this project?
+Answer:
+I learned how to structure a GenAI application, integrate Gemini API, build reusable Python modules, design a Streamlit dashboard, create ATS-style scoring logic, generate reports, and present a project professionally for recruiters and GitHub.
+
+
+58. Why should this project be selected for your portfolio?
+Answer:
+This project is practical, recruiter-friendly, and demonstrates multiple important skills: Python, GenAI, Streamlit, Plotly, PDF parsing, prompt engineering, OOP, UI design, and deployment readiness. It is directly related to job applications and has a clear real-world use case.
+
+
+59. What security considerations are included?
+Answer:
+The project keeps API keys in environment variables, excludes `.env` from GitHub, handles API failures gracefully, and avoids storing uploaded resumes permanently by default. In a production SaaS version, I would add authentication, encryption, and privacy controls.
+
+
+60. How would you scale this into a real SaaS product?
+Answer:
+To scale it into a SaaS product, I would add user authentication, a backend API, database storage, payment integration, cloud file storage, resume history, background jobs, admin analytics, and a stronger AI evaluation pipeline. I would also add privacy policies and secure document handling.
+
+
+61. What database would you use for a SaaS version?
+Answer:
+I would use PostgreSQL for user accounts, analysis records, subscription plans, and metadata. For document storage, I would use cloud storage such as AWS S3. For semantic resume search or advanced matching, I could use a vector database like Pinecone, ChromaDB, or FAISS.
+
+
+62. How would you add authentication?
+Answer:
+I would add authentication using services like Clerk, Auth0, Firebase Auth, or a custom FastAPI backend with JWT tokens. Users could log in, save reports, and track resume improvement over time.
+
+
+63. How would you test this project?
+Answer:
+I would test utility functions such as text cleaning, skill extraction, score calculation, ATS calculation, and report generation using unit tests. I would also test Streamlit workflows manually by uploading sample resumes and job descriptions.
+
+
+64. What kind of sample test cases would you write?
+Answer:
+I would write tests for:
+- Empty resume text
+- Empty job description
+- Resume with no matched skills
+- Resume with all matched skills
+- PDF parsing failure
+- Missing Gemini API key
+- Report generation fallback
+- ATS score calculation with and without contact details
+
+
+65. How does the project handle mobile responsiveness?
+Answer:
+The UI uses CSS media queries so large sections stack on smaller screens. Cards, dashboard panels, and before/after suggestions are designed to avoid overlap and remain readable on mobile.
+
+
+66. Why did you separate styling into `assets/styles.css`?
+Answer:
+Separating styling keeps the Python code cleaner. It also makes the UI easier to improve without modifying business logic. This is closer to how production applications separate presentation from functionality.
+
+
+67. What is the role of `data/skills.csv`?
+Answer:
+`data/skills.csv` stores the skill catalog used by the skill extraction module. It includes technical skills, AI skills, GenAI skills, cloud tools, deployment skills, and data tools.
+
+
+68. How does the app detect contact information?
+Answer:
+The ATS calculator uses regular expressions to detect email addresses and phone numbers. It also checks for platforms like LinkedIn or GitHub in the resume text.
+
+
+69. How does the app detect resume structure?
+Answer:
+The ATS calculator checks for important section keywords such as experience, education, projects, skills, and summary. Presence of these sections improves the structure score.
+
+
+70. How does the app detect impact?
+Answer:
+The ATS calculator checks for action words like built, improved, reduced, increased, automated, deployed, optimized, and led. It also looks for numbers or percentages, because measurable achievements make resume bullets stronger.
+
+
+71. What is readability scoring?
+Answer:
+Readability scoring checks whether the resume length is within a reasonable range. Very short resumes may lack detail, while very long resumes may be hard to review. The app rewards resumes with a practical word count.
+
+
+72. Why did you use fallback AI responses?
+Answer:
+Fallback AI responses make the app reliable. If Gemini is unavailable due to quota, invalid API key, or network issues, the user still gets useful output instead of an error-only screen.
+
+
+73. What is the biggest technical risk in this project?
+Answer:
+The biggest technical risk is relying on exact keyword matching for skills. Real resumes and job descriptions may use different wording for the same concept. This can be improved with embeddings and semantic matching.
+
+
+74. How would embeddings improve this project?
+Answer:
+Embeddings would allow the app to compare meaning instead of exact words. For example, "large language models" and "LLMs" could be matched even if the exact text differs. This would make skill detection and match scoring more accurate.
+
+
+75. How would you add RAG to this project?
+Answer:
+I would create a knowledge base of resume best practices, ATS guidelines, and role-specific skill requirements. The app could retrieve relevant guidance using vector search and pass that context to the LLM for more accurate suggestions.
+
+
+76. Why is this a GenAI project?
+Answer:
+It uses generative AI to create resume analysis, improvement suggestions, interview questions, learning roadmaps, and recruiter summaries. The AI does not just classify data; it generates personalized career guidance.
+
+
+77. What part of the project uses Pandas?
+Answer:
+Pandas is used to read the skills CSV and prepare chart data for skill analysis and dashboard visualization.
+
+
+78. What part of the project uses Plotly?
+Answer:
+Plotly is used to create interactive dashboard charts such as pie charts, radar charts, and skill coverage bar charts.
+
+
+79. What part of the project uses PyPDF2?
+Answer:
+PyPDF2 is used in the PDF reader utility to extract text from uploaded resume and job description PDFs.
+
+
+80. What part of the project uses python-dotenv?
+Answer:
+python-dotenv loads the Gemini API key from the `.env` file so that secrets are not hardcoded into the project.
+
+
+81. What part of the project uses ReportLab?
+Answer:
+ReportLab is used by the report generator to create a downloadable PDF report containing scores, skills, AI analysis, questions, roadmap, and recruiter summary.
+
+
+82. How do you ensure the app does not crash on missing inputs?
+Answer:
+The app checks whether the resume and job description are available before running analysis. If only the resume is uploaded, it asks the user to add a job description. If both are present, it runs the full analysis.
+
+
+83. What would you say if an interviewer asks whether this is an actual ATS?
+Answer:
+I would say it is not a replacement for a real enterprise ATS. It is an ATS-style analyzer that approximates common resume screening factors such as keywords, structure, contact details, readability, and impact. It is designed to help candidates improve their resume before applying.
+
+
+84. How would you make the scoring more accurate?
+Answer:
+I would collect sample resumes and job descriptions, label outcomes, and train or calibrate a scoring model. I would also add semantic skill matching, role-specific weights, section parsing, experience-level detection, and recruiter feedback loops.
+
+
+85. How would you explain the business value of this project?
+Answer:
+The business value is that it helps candidates improve job application quality and helps recruiters quickly summarize candidate fit. As a SaaS product, it could serve job seekers, colleges, bootcamps, career coaches, and recruiting teams.
+
+
+86. How would you monetize this product?
+Answer:
+Possible monetization models include:
+- Free basic analysis
+- Paid premium reports
+- Monthly subscription for job seekers
+- Bulk access for colleges or bootcamps
+- Recruiter dashboard plans
+- Resume coaching integrations
+
+
+87. How would you protect user resumes in production?
+Answer:
+I would encrypt uploaded files, avoid storing files unless required, use secure cloud storage, apply access controls, delete temporary files, add privacy policies, and ensure API providers meet data privacy requirements.
+
+
+88. What is the best part of this project?
+Answer:
+The best part is that it combines a real-world problem with GenAI, analytics, PDF processing, and product design. It is not just a model demo; it behaves like a practical application that a user can interact with.
+
+
+89. What would you improve if you had more time?
+Answer:
+I would add OCR, semantic search, authentication, database storage, resume history, role templates, better PDF formatting, and a deployed demo with screenshots.
+
+
+90. Why should we hire you based on this project?
+Answer:
+This project shows that I can build practical AI products end to end. I can work with Python, GenAI APIs, prompt engineering, data processing, UI design, modular architecture, and deployment concepts. It also shows that I can think like an engineer and a product builder.
+
+
+91. Give a short technical summary of the project.
+Answer:
+ResumeIQ is a modular Streamlit application that extracts text from resume and JD PDFs using PyPDF2, cleans text, extracts skills from a CSV catalog, calculates match and ATS scores, visualizes analytics with Plotly, generates AI outputs using Gemini, and exports a report using ReportLab.
+
+
+92. Give a short product summary of the project.
+Answer:
+ResumeIQ helps candidates improve their resume for a specific job by showing resume fit, missing skills, ATS quality, AI feedback, interview preparation questions, a learning roadmap, and recruiter-style hiring insights.
+
+
+93. How do you handle duplicate skills?
+Answer:
+The skill extractor uses sets to remove duplicate detected skills and returns a sorted list. This prevents repeated skill names from affecting the score unfairly.
+
+
+94. Why is modular design important here?
+Answer:
+Modular design makes it easier to update one part of the app without breaking others. For example, I can replace PyPDF2 with OCR, or replace Gemini with another LLM, without rewriting the whole application.
+
+
+95. How would you add OpenAI support along with Gemini?
+Answer:
+I would create a common AI provider interface and implement separate classes for Gemini and OpenAI. The app could select the provider based on an environment variable or user setting.
+
+
+96. How would you store generated reports?
+Answer:
+For the current version, reports are generated for download. In production, I would store reports in cloud storage like S3 and save metadata in PostgreSQL so users can access past reports.
+
+
+97. What is the importance of recruiter summary?
+Answer:
+The recruiter summary makes the output useful for hiring managers. It quickly explains candidate fit, strengths, concerns, and recommendation, reducing manual screening time.
+
+
+98. How can colleges or placement cells use this project?
+Answer:
+Colleges can use it to help students improve resumes before placement drives. Students can compare their resumes with job descriptions and receive skill gap analysis, preparation questions, and learning roadmaps.
+
+
+99. What is the importance of the learning roadmap?
+Answer:
+The learning roadmap converts missing skills into an action plan. Instead of only saying what is missing, the app tells the candidate what to learn over four weeks.
+
+
+100. Final interview pitch for this project.
+Answer:
+ResumeIQ is a complete GenAI resume intelligence platform built with Python and Streamlit. It analyzes resumes against job descriptions, calculates ATS and match scores, detects skill gaps, generates AI feedback, creates interview questions, builds learning roadmaps, writes recruiter summaries, and exports professional reports. The project demonstrates my ability to build practical AI applications with clean architecture, strong UI/UX, and real-world usefulness.
+
+
+COMMON RAPID-FIRE ANSWERS
+=========================
+
+Q: Main language used?
+A: Python.
+
+Q: Main framework used?
+A: Streamlit.
+
+Q: AI model/API used?
+A: Gemini API.
+
+Q: PDF library used?
+A: PyPDF2.
+
+Q: Charting library used?
+A: Plotly.
+
+Q: Data handling library used?
+A: Pandas.
+
+Q: Report generation library used?
+A: ReportLab.
+
+Q: Where are skills stored?
+A: `data/skills.csv`.
+
+Q: Where is the Gemini key stored?
+A: In the `.env` file as `GEMINI_API_KEY`.
+
+Q: What is the main entry file?
+A: `app.py`.
+
+Q: What is the folder for reusable backend logic?
+A: `utils/`.
+
+Q: What is the folder for UI pages?
+A: `pages/`.
+
+Q: What is the CSS file?
+A: `assets/styles.css`.
+
+Q: Does the app support JD PDF upload?
+A: Yes.
+
+Q: Does the app generate a downloadable report?
+A: Yes.
+
+Q: Is it a real enterprise ATS?
+A: No, it is an ATS-style analyzer that approximates common screening factors.
+
+Q: Best future upgrade?
+A: OCR plus semantic skill matching with embeddings.
+
